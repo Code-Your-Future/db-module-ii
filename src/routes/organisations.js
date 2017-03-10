@@ -11,7 +11,7 @@ module.exports = {
             return Promise.all(orgz.map(function(organisation){
                 return db.all('select Name from Service ' +
                               'join OrganisationService On Service.Id = Organisationservice.ServiceId ' +
-                              'where OrganisationService.organisationid='+organisation.Id)
+                              'where OrganisationService.organisationId='+organisation.Id)
 
             }));
         })
@@ -24,8 +24,8 @@ module.exports = {
         .then(function(){
             return Promise.all(organisations.map(function(organisation){
                 return db.all('select Name,Email from User '+
-                             'join ContactUserOrganisation On User.Id = ContactUserOrganisation.UserId '
-                             +'where ContactUserOrganisation.organisationId ='+organisation.Id)
+                             'join ContactUserOrganisation On User.Id = ContactUserOrganisation.UserId ' +
+                             'where ContactUserOrganisation.organisationId ='+organisation.Id)
             }));
         })
         .then(function(userDetails){
@@ -47,14 +47,35 @@ module.exports = {
     },
 
     add(req, res) {
+        let organisations;
+        db.all('select * from organisation')
+        .then(function(newOrgz){
+            organisations = newOrgz;
+            return Promise.all(newOrgz.map(function(organisation){
+                return db.all("insert into Organisation values (4,'Shelter', '88 Old Street', 'London', 'EC1V 9HU', '0344 515 2000') ")
+
+
+            }));
+        })
+
         res.status(404).json({ error: 'Not found' });
     },
 
     update(req, res) {
+        let organisations;
+        db.all('select * from organisation')
+        .then(function(newOrgz){
+            organisations = newOrgz;
+            return Promise.all(newOrgz.map(function(organisation){
+                return db.all("Update Organisation set Address='90 Old Road', City = 'Manchester', PostCode='M13 9HU', Telephone='0344 515 3000' where Id=1" + organisation.Id)
+
+            }));
+        })
         res.status(404).json({ error: 'Not found' });
     },
 
     remove(req, res) {
+
         res.status(404).json({ error: 'Not found' });
     }
 };
