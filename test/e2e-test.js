@@ -21,9 +21,6 @@ function copyDB() {
 }
 
 describe('The organisations API', function () {
-    before(function () {
-    });
-
     beforeEach(function () {
         /* create copy of database for each test
          * for the sake of test independence */
