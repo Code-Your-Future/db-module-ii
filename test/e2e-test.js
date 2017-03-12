@@ -7,24 +7,26 @@ const initialiseApp = require('../src/server');
 
 let server;
 
-describe('The organisations API', function () {
-    before(function () {
-        return initialiseApp.then(app => server = app);
-    });
+function copyDB() {
+    return new Promise((resolve, reject) => {
+        const readStream = fs.createReadStream('data/database.sqlite');
+        const writeStream = fs.createWriteStream('test/database.tmp.sqlite');
 
+        readStream.on('error', reject);
+        writeStream.on('error', reject);
+        writeStream.on('finish', resolve);
+
+        readStream.pipe(writeStream);
+    });
+}
+
+describe('The organisations API', function () {
     beforeEach(function () {
         /* create copy of database for each test
          * for the sake of test independence */
-        return new Promise((resolve, reject) => {
-            const readStream = fs.createReadStream('data/database.sqlite');
-            const writeStream = fs.createWriteStream('test/database.tmp.sqlite');
-
-            readStream.on('error', reject);
-            writeStream.on('error', reject);
-            writeStream.on('finish', resolve);
-
-            readStream.pipe(writeStream);
-        });
+        return copyDB()
+            .then(() => initialiseApp('test/database.tmp.sqlite'))
+            .then(app => server = app);
     });
 
     after(function () {

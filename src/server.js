@@ -12,9 +12,9 @@ app.post('/organisations', organisationsRoutes.add);
 app.put('/organisations/:id', organisationsRoutes.update);
 app['delete']('/organisations/:id', organisationsRoutes.remove);
 
-const initialiseApp = db.open('data/database.sqlite', { Promise })
+const initialiseApp = (dbname) => db.open(dbname, { Promise })
     .then(() => {
-        app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+        app.listen(PORT, () => console.log(`Listening on ${PORT}`)); // eslint-disable-line
         return app;
     });
 
