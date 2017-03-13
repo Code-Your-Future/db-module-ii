@@ -3,7 +3,7 @@
 const { expect } = require('chai');
 const request = require('supertest');
 const fs = require('fs');
-const initialiseApp = require('../src/server');
+const initialiseApp = require('../src/initialiseApp');
 
 let server;
 
