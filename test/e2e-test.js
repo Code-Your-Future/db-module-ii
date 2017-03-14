@@ -38,7 +38,7 @@ describe('The organisations API', function () {
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .then(response => {
-                    expect(response.body.length).to.equal(3);
+                    expect(response.body.length).to.equal(4);
 
                     expect(response.body[0].Id).to.equal(1);
                     expect(response.body[0].Name).to.equal('Amnesty International');
@@ -92,6 +92,8 @@ describe('The organisations API', function () {
                     expect(response.body[2].Contacts.length).to.equal(1);
                     expect(response.body[2].Contacts[0].Name).to.equal('Greg Fred');
                     expect(response.body[2].Contacts[0].Email).to.equal('greg@fred.com');
+
+
                 });
         });
     });

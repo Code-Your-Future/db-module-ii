@@ -49,10 +49,10 @@ module.exports = {
     add(req, res) {
         let organisations;
         db.all('select * from organisation')
-        .then(function(newOrgz){
-            organisations = newOrgz;
+        .then(function(addOrgz){
+            organisations = addOrgz;
             return Promise.all(newOrgz.map(function(organisation){
-                return db.all("insert into Organisation values (4,'Shelter', '88 Old Street', 'London', 'EC1V 9HU', '0344 515 2000') ")
+                return db.all("insert into Organisation values (4,'Shelter', '88 Old Street', 'London', 'EC1V 9HU', '0344 515 2000')")
 
 
             }));
@@ -62,12 +62,14 @@ module.exports = {
     },
 
     update(req, res) {
+        // const id = req.params.id;
+        // const data = request.body;
         let organisations;
         db.all('select * from organisation')
-        .then(function(newOrgz){
-            organisations = newOrgz;
+        .then(function(UpdatedOrgz){
+            organisations = UpdatedOrgz;
             return Promise.all(newOrgz.map(function(organisation){
-                return db.all("Update Organisation set Address='90 Old Road', City = 'Manchester', PostCode='M13 9HU', Telephone='0344 515 3000' where Id=1" + organisation.Id)
+                return db.all("Update Organisation set Address='90 Old Road', City = 'Manchester', PostCode='M13 9HU', Telephone='0344 515 3000' where Id=1")
 
             }));
         })
