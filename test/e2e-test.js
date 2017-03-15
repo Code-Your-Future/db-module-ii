@@ -109,7 +109,7 @@ describe('The organisations API', function () {
                 .field('Telephone', '0344 515 2000')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => request.get('/organisations'))
+                .then(() => request(server).get('/organisations'))
                 .then(response => {
                     expect(response.body.length).to.equal(4);
 
@@ -133,7 +133,7 @@ describe('The organisations API', function () {
                 .field('Telephone', '0344 515 3000')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => request.get('/organisations'))
+                .then(() => request(server).get('/organisations'))
                 .then(response => {
                     expect(response.body.length).to.equal(3);
 
@@ -152,7 +152,7 @@ describe('The organisations API', function () {
             return request(server)['delete']('/organisations/1')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => request.get('/organisations'))
+                .then(() => request(server).get('/organisations'))
                 .then(response => {
                     expect(response.body.length).to.equal(2);
 
