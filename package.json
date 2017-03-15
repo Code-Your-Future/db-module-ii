@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/code-your-future/db-module-ii#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "4.15.0",
     "sqlite": "2.3.0"
   },
@@ -32,6 +33,7 @@
     "eslint": "3.17.0",
     "mocha": "3.2.0",
     "nodemon": "1.11.0",
-    "supertest": "3.0.0"
+    "supertest": "3.0.0",
+    "hbs": "^4.0.1"
   }
 }
