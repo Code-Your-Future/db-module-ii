@@ -9,7 +9,7 @@ const getPromise =(promise,sqlStatement)=>{
 }
 
 const getDML = (sqlStetment,values) => {
-    return db.run(sqlStetment,values);
+    return db.run(sqlStetment,values)
 }
 
 module.exports = {
@@ -53,31 +53,35 @@ module.exports = {
                                  VALUES (?,?,?,?,?,?)`;    
         const values = Object.keys(formValues).map((key)=> (key === 'Id') ? Number(formValues[key]): formValues[key]);
         const lastRecord=`Select * FROM organisation where organisation.Id=${values[0]}`;
-                
+          
         getDML(insertStatement,values)
         .then(()=>{
+            res.status(200).json({success:'OK'});
+        })
+        .then(()=>{
             db.all(lastRecord)
-            .then(lastOrganization => res.json(lastOrganization))
+            .then(lastOrganization => res.status(200).json(lastOrganization))
             .catch((err)=> res.status(500).json({error: 'Last recored not fetch - ' + err}))
         })
+        .catch((err)=> res.status(500).json({Error:'Insert not succeeded ' + err}))
     },
 
     update(req, res) {
         const id = req.params.id;
         const formValues=req.body;
-        const statement = ["UPDATE Organisation " + 
-                            "SET Address=?, City=?, PostCode=?, Telephone=? WHERE Organisation.Id=?"];
+        const statement = `UPDATE Organisation 
+                           SET Address=?, City=?, PostCode=?, Telephone=? WHERE Organisation.Id=?`;
         const lastRecord = `Select * FROM organisation where organisation.Id=${id}`;
+        
         const values = Object.keys(formValues).map((key)=> formValues[key]);        
         values.push(Number(id));
-        
-        getDML(statement[0],values)
+        getDML(statement,values)
         .then(()=>{
             db.all(lastRecord)
             .then(lastOrganization => res.json(lastOrganization))
             .catch((err)=> res.status(500).json({error: 'Last recored not fetch - ' + err}))
         })
-        .catch((err)=> res.status(500).json({ error: 'Update not succeeded' + err }));
+        .catch((err)=> res.status(500).json({ error: 'Update not succeeded ' + err }));
     },
 
     remove(req, res) {

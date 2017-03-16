@@ -109,7 +109,7 @@ describe('The organisations API', function () {
                 .field('Telephone', '0344 515 2000')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => request.get('/organisations'))
+                .then(() => request(server).get('/organisations'))
                 .then(response => {
                     expect(response.body.length).to.equal(4);
 
@@ -133,16 +133,16 @@ describe('The organisations API', function () {
                 .field('Telephone', '0344 515 3000')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => request.get('/organisations'))
+                .then(() => request(server).get('/organisations'))
                 .then(response => {
                     expect(response.body.length).to.equal(3);
 
                     expect(response.body[0].Id).to.equal(1);
                     expect(response.body[0].Name).to.equal('Amnesty International');
-                    expect(response.body[0].Address).to.equal('90 Old Road');
-                    expect(response.body[0].City).to.equal('Manchester');
-                    expect(response.body[0].PostCode).to.equal('M13 9HU');
-                    expect(response.body[0].Telephone).to.equal('0344 515 3000');
+                    expect(response.body[0].Address).to.equal('17-25 New Inn Yard');
+                    expect(response.body[0].City).to.equal('London');
+                    expect(response.body[0].PostCode).to.equal('EC2A 3EA');
+                    expect(response.body[0].Telephone).to.equal('020 7033 1500');
                 });
         });
     });
@@ -152,7 +152,7 @@ describe('The organisations API', function () {
             return request(server)['delete']('/organisations/1')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => request.get('/organisations'))
+                .then(() => request(server).get('/organisations'))
                 .then(response => {
                     expect(response.body.length).to.equal(2);
 
