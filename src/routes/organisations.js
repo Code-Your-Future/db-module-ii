@@ -76,9 +76,12 @@ module.exports = {
 
     remove(req, res) {
         let organisations;
-        return db.all('DELETE FROM OrganisationService WHERE OrganisationId = 2 ' +
-                'AND Organisation WHERE Organisation.Id = 2')
-        
+         return db.all('DELETE FROM ' +
+            'OrganisationService WHERE OrganisationId = 2 ')
+         .then(function() {
+            return db.all('delete from Organisation WHERE Organisation.Id = 2')        
+            })
+
         .then(function(organisations){
           res.json(organisations)   
         })
@@ -89,3 +92,10 @@ module.exports = {
         });
     },
 };
+
+/*
+select  thing
+from table
+where thing=1 and thing=2
+
+*/
