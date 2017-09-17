@@ -59,7 +59,7 @@ Refresh your browser; you should now see the related services and contact users 
 * Specify an options object for this model with an `omitPivot` property, which is set to `true`. Pivots are fields used by Bookshelf when it evaluates relationships, but provide no benefit to the users of our API; it's essentially an implementation detail
 
 
-### Fetching Individual Users
+### Fetching Individual Organisations
 
 Take a look at the `getOrganisation` route. This is similar to the previous route, only it fetches an individual organisation based upon the ID passed via the URL. Let's try this by navigating to [http://localhost:8001/organisations/1](http://localhost:8001/organisations/1) in the browser; you should see Amnesty International's record, but without neither the services nor contact users. As we did the for the getOrganisations route, specify the `withRelated` option with the appropriate relationship names.
 
