@@ -30,6 +30,13 @@ This repository contains an [Express app](https://github.com/Code-Your-Future/db
 
 ## Local development
 
+The most important step is to install SQLite itself, **if it isn't already available on your machine**.
+
+It's recommended to install this via a package manager for simplicity's sake:
+
+* [Homebrew](https://brew.sh/) (macOS): `brew install sqlite`
+* APT (Ubuntu/Debian): `sudo apt install sqlite`
+
 Make sure you install all of the project dependencies with `npm i` before you do anything else. Then you can run:
 
 * `npm start` - runs the server via nodemon, restarting on changes to the `src` directory
